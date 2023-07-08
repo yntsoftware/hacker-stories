@@ -1,33 +1,70 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import * as React from 'react';
 import './App.css'
 
+const list = [
+  {
+    title: 'React',
+    url: 'https://reactjs.org/',
+    author: 'Jordan Walke',
+    objID: 0,
+  },
+  {
+    title: 'Redux',
+    url: 'https://redux.js.org/',
+    author: 'Dan Abramov',
+    objID: 1,
+  },
+];
+
+const numbers = [1, 2, 3, 4];
+const expNumbers = numbers.map(n => n*n);
+
+const welcome = {
+  greeting: "hello",
+  title: "reactjs"
+};
+
+function List() {
+  return (
+    <>
+      <ul>
+        {list.map(function(item) {
+          return <li key={item.objID}>
+                   <span>
+                     <a href={item.url}>visit</a>
+                   </span>
+                   {item.title} by 
+                   {item.author}
+            </li>;
+        })}
+      </ul>
+      <ul>
+        {expNumbers.map(function(n) {
+          return <li key={n}>{n}</li>;
+        })}
+      </ul>
+    </>
+  );
+}
+
+function Greet() {
+  return (
+    <>
+      <h1>{welcome.greeting} {welcome.title}</h1>
+      <div>
+        <label htmlFor="name">Name: </label>
+        <input id="name" type="text" />
+      </div>
+    </>
+  );
+}
+
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Greet />
+      <List />
     </>
   )
 }
